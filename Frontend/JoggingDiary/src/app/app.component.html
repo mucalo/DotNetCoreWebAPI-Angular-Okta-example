@@ -1,8 +1,8 @@
 <div class="container">
     
     
-    <button *ngIf="!oktaAuth.isAuthenticated()" (click)="oktaAuth.loginRedirect()">Login</button>
-    <button *ngIf="oktaAuth.isAuthenticated()" (click)="oktaAuth.logout()">Logout</button>
+    <button *ngIf="!oktaAuth.isAuthenticated()" (click)="oktaAuth.loginRedirect()" class="login-button">Login</button>
+    <button *ngIf="oktaAuth.isAuthenticated()" (click)="oktaAuth.logout()" class="login-button">Logout</button>
 
     <h1>Jogging diary</h1>
     <hr/>
