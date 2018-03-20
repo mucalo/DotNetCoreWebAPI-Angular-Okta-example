@@ -27,19 +27,21 @@ namespace Backend.Controllers
         [HttpGet]
         public IEnumerable<Workout> GetWorkout()
         {
-            return _context.Workout.OrderByDescending(d => d.Date);
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "uid")?.Value;
+            return _context.Workout.Where(u => u.UserId == userId).OrderByDescending(d => d.Date);
         }
 
         // GET: api/Workouts/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetWorkout([FromRoute] int id)
         {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "uid")?.Value;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var workout = await _context.Workout.SingleOrDefaultAsync(m => m.Id == id);
+            var workout = await _context.Workout.SingleOrDefaultAsync(m => m.Id == id && m.UserId == userId);
 
             if (workout == null)
             {
@@ -59,6 +61,13 @@ namespace Backend.Controllers
             }
 
             if (id != workout.Id)
+            {
+                return BadRequest();
+            }
+
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "uid")?.Value;
+            var currentWorkout = _context.Workout.FirstOrDefault(w => w.Id == id);
+            if(currentWorkout == null || currentWorkout.UserId != userId)
             {
                 return BadRequest();
             }
@@ -93,6 +102,9 @@ namespace Backend.Controllers
                 return BadRequest(ModelState);
             }
 
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "uid")?.Value;
+            workout.UserId = userId;
+
             _context.Workout.Add(workout);
             await _context.SaveChangesAsync();
 
@@ -103,12 +115,14 @@ namespace Backend.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteWorkout([FromRoute] int id)
         {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "uid")?.Value;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var workout = await _context.Workout.SingleOrDefaultAsync(m => m.Id == id);
+            var workout = await _context.Workout.SingleOrDefaultAsync(m => m.Id == id && m.UserId == userId);
             if (workout == null)
             {
                 return NotFound();

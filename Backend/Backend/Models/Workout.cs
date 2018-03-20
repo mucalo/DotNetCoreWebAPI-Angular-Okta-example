@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,5 +15,8 @@ namespace Backend.Models
         public int DistanceInMeters { get; set; }
         [Required]
         public long TimeInSeconds { get; set; }
+
+        [JsonIgnore]
+        public string UserId { get; set; }
     }
 }
