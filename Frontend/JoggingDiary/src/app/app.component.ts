@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { JoggingServiceService} from './jogging-service.service';
+import { WorkoutService} from './workout.service';
 import { error } from 'selenium-webdriver';
 import { OktaAuthService } from '@okta/okta-angular';
 import * as _ from 'lodash';
@@ -11,7 +11,7 @@ import * as _ from 'lodash';
 })
 export class AppComponent {
 
-  constructor ( public oktaAuth: OktaAuthService, private joggingService: JoggingServiceService) {
+  constructor ( public oktaAuth: OktaAuthService, private workoutService: WorkoutService) {
 
   }
 

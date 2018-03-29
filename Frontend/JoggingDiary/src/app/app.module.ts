@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { GridJoggingComponent } from './grid-jogging/grid-jogging.component';
 import { AddOrUpdateJoggingComponent } from './add-or-update-jogging/add-or-update-jogging.component';
 
-import { JoggingServiceService } from './jogging-service.service';
+import { WorkoutService } from './workout.service';
 
 import {
   OktaAuthModule,
@@ -48,7 +48,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     OktaAuthModule.initAuth(config)
   ],
-  providers: [JoggingServiceService,
+  providers: [WorkoutService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]

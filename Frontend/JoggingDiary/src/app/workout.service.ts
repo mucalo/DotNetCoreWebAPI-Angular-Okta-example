@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { OktaAuthService } from '@okta/okta-angular/dist/okta/okta.service';
 
 @Injectable()
-export class JoggingServiceService {
+export class WorkoutService {
   private headers: HttpHeaders;
   private accessPointUrl: string = 'http://localhost:53877/api/workouts';
 

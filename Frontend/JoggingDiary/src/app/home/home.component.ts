@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { JoggingServiceService} from './../jogging-service.service';
+import { WorkoutService} from './../workout.service';
 import { error } from 'selenium-webdriver';
 import { OktaAuthService } from '@okta/okta-angular';
 import * as _ from 'lodash';
@@ -13,8 +13,8 @@ export class HomeComponent {
   public joggingData: Array<any>;
   public currentJogging: any;
 
-  constructor ( public oktaAuth: OktaAuthService, private joggingService: JoggingServiceService) {
-    joggingService.get().subscribe((data: any) => this.joggingData = data);
+  constructor ( public oktaAuth: OktaAuthService, private workoutService: WorkoutService) {
+    workoutService.get().subscribe((data: any) => this.joggingData = data);
     this.currentJogging = {
       id: undefined,
       date: undefined,
@@ -31,11 +31,11 @@ export class HomeComponent {
 
     if (joggingWithId) {
       const updateIndex = _.findIndex(this.joggingData, {id: joggingWithId.id});
-      this.joggingService.update(jogging).subscribe(
+      this.workoutService.update(jogging).subscribe(
         joggingRecord =>  this.joggingData.splice(updateIndex, 1, jogging)
       );
     } else {
-      this.joggingService.add(jogging).subscribe(
+      this.workoutService.add(jogging).subscribe(
         joggingRecord => this.joggingData.push(jogging)
       );
     }
@@ -63,7 +63,7 @@ export class HomeComponent {
 
   public deleteClicked(record) {
     const deleteIndex = _.findIndex(this.joggingData, {id: record.id});
-    this.joggingService.remove(record).subscribe(
+    this.workoutService.remove(record).subscribe(
       result => this.joggingData.splice(deleteIndex, 1)
     );
   }
