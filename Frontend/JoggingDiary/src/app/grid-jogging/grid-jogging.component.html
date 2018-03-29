@@ -13,7 +13,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let joggingInfo of joggingData">
-            <td>{{ joggingInfo.date | date:'medium' }}</td>
+            <td>{{ joggingInfo.date | date:'shortDate' }}</td>
             <td>{{ joggingInfo.distanceInMeters | number: '1.2-2' }}</td>
             <td>{{ joggingInfo.timeInSeconds / 60 |number: '1.0-0' }}:{{ joggingInfo.timeInSeconds % 60 |number: '2.0-0' }}</td>
             <td>{{ (joggingInfo.distanceInMeters / joggingInfo.timeInSeconds) * 3.6 | number:'1.2-2' }}</td>
