@@ -10,7 +10,7 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (request.url.indexOf('localhost') > -1) {
+    if(this.oktaAuth.isAuthenticated()) {
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${this.oktaAuth.getAccessToken().accessToken}`
