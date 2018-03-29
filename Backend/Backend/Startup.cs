@@ -28,16 +28,6 @@ namespace Backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc()
-                .AddJsonOptions(options =>
-                {
-                    options.SerializerSettings.ContractResolver
-                        = new CamelCasePropertyNamesContractResolver();
-                });
-
-            services.AddDbContext<WorkoutContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("WorkoutContext")));
-
             // Add service and create Policy with options
             services.AddCors(options =>
             {
@@ -48,6 +38,17 @@ namespace Backend
                     .AllowCredentials());
             });
 
+            services.AddMvc()
+                .AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.ContractResolver
+                        = new CamelCasePropertyNamesContractResolver();
+                    options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
+                });
+
+            services.AddDbContext<WorkoutContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("WorkoutContext")));
+                        
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {

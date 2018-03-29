@@ -66,14 +66,9 @@ namespace Backend.Controllers
             }
 
             var userId = User.Claims.FirstOrDefault(c => c.Type == "uid")?.Value;
-            var currentWorkout = _context.Workout.FirstOrDefault(w => w.Id == id);
-            if(currentWorkout == null || currentWorkout.UserId != userId)
-            {
-                return BadRequest();
-            }
-
+            
             _context.Entry(workout).State = EntityState.Modified;
-
+            
             try
             {
                 await _context.SaveChangesAsync();

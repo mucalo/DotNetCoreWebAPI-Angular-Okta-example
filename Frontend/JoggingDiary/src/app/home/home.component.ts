@@ -42,7 +42,7 @@ export class HomeComponent {
 
     this.currentJogging = {
       id: undefined,
-      date: undefined,
+      date: '',
       distanceInMeters: 0,
       timeInSeconds: 0
     };

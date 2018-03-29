@@ -24,7 +24,7 @@ export class AddOrUpdateJoggingComponent implements OnInit {
     // Create an empty jogging object
     this.joggingInfo = {
       id: undefined,
-      date: undefined,
+      date: '',
       distanceInMeters: 0,
       timeInSeconds: 0
     };
