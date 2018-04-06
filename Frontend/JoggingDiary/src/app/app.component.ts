@@ -12,11 +12,8 @@ import * as _ from 'lodash';
 export class AppComponent {
   public isAuthenticated : boolean;
   constructor ( public oktaAuth: OktaAuthService, private workoutService: WorkoutService) {
-    
-    console.log("Constructing...");
     // get authentication state for immediate use
     this.oktaAuth.isAuthenticated().then(result => {
-      console.log("Gor result");
       this.isAuthenticated = result;
     });
  
@@ -25,6 +22,5 @@ export class AppComponent {
       (isAuthenticated: boolean)  => this.isAuthenticated = isAuthenticated
     );
   }
-
   
 }

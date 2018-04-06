@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { DecimalPipe } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -44,7 +45,8 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    OktaAuthModule.initAuth(config)
+    OktaAuthModule.initAuth(config),
+    FormsModule,
   ],
   providers: [WorkoutService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

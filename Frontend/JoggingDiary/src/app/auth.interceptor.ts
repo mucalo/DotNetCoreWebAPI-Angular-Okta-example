@@ -22,22 +22,17 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('Intercepting...');
     return this.isAuthenticated().mergeMap((isAuthenticated) => {
       if (!isAuthenticated) {
-        console.log('Not authenticated.');
         return next.handle(request);
       }
 
-      console.log('Authenticated!');
       return this.getAccessToken().mergeMap((accessToken) => {
-          console.log("Got access token.");
           request = request.clone({
             setHeaders: {
               Authorization: `Bearer ${accessToken}`
             }
           });
-
           return next.handle(request);
         })
     });
