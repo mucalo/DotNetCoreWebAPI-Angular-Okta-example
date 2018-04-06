@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { OktaAuthService } from '@okta/okta-angular/dist/okta/okta.service';
 
 @Injectable()
 export class WorkoutService {
   private headers: HttpHeaders;
   private accessPointUrl: string = 'http://localhost:53877/api/workouts';
 
-  constructor(private http: HttpClient, private oktaAuth: OktaAuthService) {
+  constructor(private http: HttpClient) {
     this.headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
   }
 

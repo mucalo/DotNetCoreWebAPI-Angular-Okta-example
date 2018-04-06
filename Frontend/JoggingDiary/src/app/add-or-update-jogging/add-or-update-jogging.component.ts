@@ -13,7 +13,6 @@ export class AddOrUpdateJoggingComponent implements OnInit {
 
   constructor() {
     this.clearJoggingInfo();
-    console.log(this.joggingInfo.date);
   }
 
   ngOnInit() {

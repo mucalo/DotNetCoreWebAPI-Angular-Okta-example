@@ -21,8 +21,6 @@ export class GridJoggingComponent implements OnInit {
   }
 
   public editRecord(record) {
-    console.log('Edit in Grid');
-    console.log(record);
     const clonedRecord = Object.assign({}, record);
     this.editClicked.emit(clonedRecord);
   }
@@ -30,7 +28,7 @@ export class GridJoggingComponent implements OnInit {
   public newRecord() {
     const newJoggingRecord = {
       id: undefined,
-      date: undefined,
+      date: '',
       distanceInMeters: 0,
       timeInSeconds: 0
     };

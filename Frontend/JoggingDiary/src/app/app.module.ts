@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -17,8 +18,6 @@ import {
   OktaAuthModule,
   OktaCallbackComponent,
 } from '@okta/okta-angular';
-// import { HomeComponent } from './home/home.component';
-// import { LoginButtonComponent } from './login-button/login-button.component';
 import * as _ from 'lodash';
 import { HomeComponent } from './home/home.component';
 
@@ -40,7 +39,6 @@ const appRoutes: Routes = [
     GridJoggingComponent,
     AddOrUpdateJoggingComponent,
     HomeComponent,
-    // LoginButtonComponent,
   ],
   imports: [
     BrowserModule,

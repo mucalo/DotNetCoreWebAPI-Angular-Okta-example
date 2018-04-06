@@ -12,15 +12,30 @@ import * as _ from 'lodash';
 export class HomeComponent {
   public joggingData: Array<any>;
   public currentJogging: any;
+  public isAuthenticated: boolean;
 
   constructor ( public oktaAuth: OktaAuthService, private workoutService: WorkoutService) {
+    // get authentication state for immediate use
+    this.oktaAuth.isAuthenticated().then(result => {
+      this.isAuthenticated = result;
+    });
+  
+    // subscribe to authentication state changes
+    this.oktaAuth.$authenticationState.subscribe(
+      (isAuthenticated: boolean)  => this.isAuthenticated = isAuthenticated
+    );
+    
     workoutService.get().subscribe((data: any) => this.joggingData = data);
-    this.currentJogging = {
+    this.currentJogging = this.setInitialValuesForJoggingData();
+  }
+
+  private setInitialValuesForJoggingData () {
+    return {
       id: undefined,
-      date: undefined,
+      date: '',
       distanceInMeters: 0,
       timeInSeconds: 0
-    };
+    }
   }
 
   public createOrUpdateJogging = function(jogging: any) {
@@ -40,12 +55,7 @@ export class HomeComponent {
       );
     }
 
-    this.currentJogging = {
-      id: undefined,
-      date: '',
-      distanceInMeters: 0,
-      timeInSeconds: 0
-    };
+    this.currentJogging = this.setInitialValuesForJoggingData();
   };
 
   public editClicked = function(record) {
@@ -53,12 +63,7 @@ export class HomeComponent {
   };
 
   public newClicked = function() {
-    this.currentJogging = {
-      id: undefined,
-      date: undefined,
-      distanceInMeters: 0,
-      timeInSeconds: 0
-    };
+    this.currentJogging = this.setInitialValuesForJoggingData();
   };
 
   public deleteClicked(record) {
