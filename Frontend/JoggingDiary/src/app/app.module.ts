@@ -18,9 +18,12 @@ import { WorkoutService } from './workout.service';
 import {
   OktaAuthModule,
   OktaCallbackComponent,
+  OktaAuthGuard
 } from '@okta/okta-angular';
 import * as _ from 'lodash';
 import { HomeComponent } from './home/home.component';
+
+
 
 const config = {
   issuer: 'https://dev-611348.oktapreview.com/oauth2/default',
@@ -39,7 +42,7 @@ const appRoutes: Routes = [
     AppComponent,
     GridJoggingComponent,
     AddOrUpdateJoggingComponent,
-    HomeComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

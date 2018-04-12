@@ -26,13 +26,7 @@ export class GridJoggingComponent implements OnInit {
   }
 
   public newRecord() {
-    const newJoggingRecord = {
-      id: undefined,
-      date: '',
-      distanceInMeters: 0,
-      timeInSeconds: 0
-    };
-    this.newClicked.emit(newJoggingRecord);
+    this.newClicked.emit();
   }
 
 }

@@ -66,7 +66,11 @@ namespace Backend.Controllers
             }
 
             var userId = User.Claims.FirstOrDefault(c => c.Type == "uid")?.Value;
-            
+            if(_context.Workout.FirstOrDefault(c => c.UserId == userId && c.Id == id) == null)
+            {
+                return NotFound();
+            }
+                        
             _context.Entry(workout).State = EntityState.Modified;
             
             try
@@ -110,12 +114,12 @@ namespace Backend.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteWorkout([FromRoute] int id)
         {
-            var userId = User.Claims.FirstOrDefault(c => c.Type == "uid")?.Value;
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "uid")?.Value;
 
             var workout = await _context.Workout.SingleOrDefaultAsync(m => m.Id == id && m.UserId == userId);
             if (workout == null)
